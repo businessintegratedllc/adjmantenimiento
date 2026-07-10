@@ -54,22 +54,20 @@
     lbCounter.textContent = (current + 1) + " / " + images.length;
   }
   function openLightbox(i) {
-    lb.hidden = false;
-    requestAnimationFrame(() => lb.classList.add("show"));
+    lb.classList.add("show");
     document.body.style.overflow = "hidden";
     showImage(i);
   }
   function closeLightbox() {
     lb.classList.remove("show");
     document.body.style.overflow = "";
-    setTimeout(() => (lb.hidden = true), 300);
   }
   lbClose.addEventListener("click", closeLightbox);
   lbPrev.addEventListener("click", () => showImage(current - 1));
   lbNext.addEventListener("click", () => showImage(current + 1));
   lb.addEventListener("click", (e) => { if (e.target === lb) closeLightbox(); });
   document.addEventListener("keydown", (e) => {
-    if (lb.hidden) return;
+    if (!lb.classList.contains("show")) return;
     if (e.key === "Escape") closeLightbox();
     if (e.key === "ArrowLeft") showImage(current - 1);
     if (e.key === "ArrowRight") showImage(current + 1);
